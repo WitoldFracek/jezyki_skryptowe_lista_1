@@ -44,7 +44,7 @@ int main(int args, char** argv, char** env)
 {
     bool b_is_silent = isSilent(args, argv);
     int i_return_code = 0;
-    if(args == 1)
+    if(args == 1 + b_is_silent)
     {
         i_return_code = 11;
         if(!b_is_silent) cout << i_return_code << endl;

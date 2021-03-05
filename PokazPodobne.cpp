@@ -1,6 +1,42 @@
 #include <iostream>
+#include <algorithm>
 #include <vector>
 using namespace std;
+
+
+class Storage
+{
+public:
+    Storage(string sName, vector<string> vData)
+    {
+        s_name = sName;
+        v_data = vData;
+    }
+
+    string getName()
+    {
+        return s_name;
+    }
+
+    vector<string> getData()
+    {
+        return v_data;
+    }
+
+    bool operator<(const Storage& cOther)
+    {
+        return s_name > cOther.s_name;
+    }
+
+    bool operator>(const Storage& cOther)
+    {
+        return s_name < cOther.s_name;
+    }
+
+private:
+    string s_name;
+    vector<string> v_data;
+};
 
 string paramToString(char* arg)
 {
@@ -117,9 +153,11 @@ int main(int args, char** argv, char** env)
     }
     bool b_is_silent = isSilent(argsToString[argsToString.size()-1]);
 
-    int iter = 0;
+    vector<Storage> v_storage;
+
     for(int i=0; i<argsToString.size()-b_is_silent; i++)
     {
+        int iter = 0;
         while(env[iter])
         {
             string s_name = getName(env[iter]);
@@ -128,17 +166,30 @@ int main(int args, char** argv, char** env)
                 b_at_least_one = true;
                 string s_data = getData(env[iter]);
                 vector<string> v_data = split(s_data, ';');
-                cout << s_name << endl << "=" << endl;
+                Storage s(s_name, v_data);
+                v_storage.push_back(s);
+                /*cout << s_name << endl << "=" << endl;
                 for(int j=0; j<v_data.size(); j++)
                 {
                     cout << "    " << v_data[j] << endl;
                 }
-                endl(cout);
+                endl(cout);*/
             }
             iter++;
         }
     }
     if(!b_at_least_one && !b_is_silent) cout << "NONE" << endl;
+
+    sort(v_storage.begin(), v_storage.end());
+    for(int i=0; i<v_storage.size(); i++)
+    {
+        cout << v_storage[i].getName() << endl << "=" << endl;
+        for(int j=0; j<v_storage[i].getData().size(); j++)
+        {
+            cout << "    " << v_storage[i].getData()[j] << endl;
+        }
+        endl(cout);
+    }
 
 
     return 0;

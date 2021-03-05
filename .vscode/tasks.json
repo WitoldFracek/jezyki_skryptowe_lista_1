@@ -4,16 +4,9 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Build",
+            "label": "echo",
             "type": "shell",
             "command": "g++",
-            /*"args" : [
-                #"-o",
-                #"KodPowrotu",
-               # "-g",
-               # "KodPowrotu.cpp"
-           ],
-           "group": "build"*/
         }
     ]
 }

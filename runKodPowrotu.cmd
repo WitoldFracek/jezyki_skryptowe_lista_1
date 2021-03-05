@@ -1,6 +1,6 @@
 @echo off
 
-kodPowrotu %1 /s
+kodPowrotu %* /s
 
 if %ERRORLEVEL% LSS 11 ( echo Prawidlowa wartosc )
 if %ERRORLEVEL% EQU 11 ( echo Brak parametru )

@@ -7,7 +7,7 @@ bool isSilent(int len, char** arg)
     {
         if(arg[i][0] != '\0' && arg[i][1] != '\0' && arg[i][2] == '\0')
         {
-            if(arg[i][0] == '\\')
+            if(arg[i][0] == '/')
             {
                 if(arg[i][1] == 's' || arg[i][1] == 'S')
                     return true;
@@ -17,42 +17,57 @@ bool isSilent(int len, char** arg)
     return false;
 }
 
-string toStringArray(int len, char** arg)
+int parseInt(char* number, bool* contr)
 {
-    string s_ret[len];
-    for(int i = 0; i<len; i++)
+    int i_ret = 0;
+    int i_counter = 0;
+    while(number[i_counter] != '\0')
     {
-        
+        if(number[i_counter] == '.')
+            return i_ret;
+        if(number[i_counter] >= '0' && number[i_counter] <= '9')
+        {
+            i_ret = i_ret *10;
+            i_ret += number[i_counter] - '0';
+        }
+        else{
+            *contr = false;
+        }
+        i_counter++;
+
     }
+    return i_ret;
 }
 
 
 int main(int args, char** argv, char** env)
 {
     bool b_is_silent = isSilent(args, argv);
-    cout << "is silent: " << b_is_silent << endl;
     int i_return_code = 0;
-    return 0;
-    /*if(args == 1)
+    if(args == 1)
     {
-        puts("11");
-        return 11;
+        i_return_code = 11;
+        if(!b_is_silent) cout << i_return_code << endl;
+        return i_return_code;
     }
     if(args > 2 + b_is_silent)
     {
-        puts("13");
-        return 13;
+        i_return_code = 13;
+        if(!b_is_silent) cout << i_return_code << endl;
+        return i_return_code;
     }
-    try
+    bool contr = true;
+    i_return_code = parseInt(argv[1], &contr);
+    if(contr)
     {
-        int i_first_param = atoi(argv[1]);
-        i_return_code = i_first_param;
-        puts(argv[1]);
-        return i_first_param;
+        if(!b_is_silent) cout << i_return_code << endl;
+        return i_return_code;
     }
-    catch(exception e)
+    else
     {
-        return 12;
-    }*/
+        i_return_code = 12;
+        if(!b_is_silent) cout << i_return_code << endl;
+        return i_return_code;
+    }
 
 }

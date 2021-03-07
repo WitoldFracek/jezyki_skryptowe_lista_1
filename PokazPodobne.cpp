@@ -168,12 +168,6 @@ int main(int args, char** argv, char** env)
                 vector<string> v_data = split(s_data, ';');
                 Storage s(s_name, v_data);
                 v_storage.push_back(s);
-                /*cout << s_name << endl << "=" << endl;
-                for(int j=0; j<v_data.size(); j++)
-                {
-                    cout << "    " << v_data[j] << endl;
-                }
-                endl(cout);*/
             }
             iter++;
         }

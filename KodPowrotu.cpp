@@ -21,11 +21,12 @@ int parseInt(char* number, bool* contr)
 {
     int i_ret = 0;
     int i_counter = 0;
-    while(number[i_counter] != '\0')
+    bool b_has_dot_occured = false;
+    while(number[i_counter] != '\0' && !b_has_dot_occured)
     {
-        if(number[i_counter] == '.')
-            return i_ret;
-        if(number[i_counter] >= '0' && number[i_counter] <= '9')
+        if(number[i_counter] == '.' || number[i_counter] == ',')
+            b_has_dot_occured = true;
+        else if(number[i_counter] >= '0' && number[i_counter] <= '9')
         {
             i_ret = i_ret *10;
             i_ret += number[i_counter] - '0';
@@ -35,6 +36,15 @@ int parseInt(char* number, bool* contr)
         }
         i_counter++;
 
+    }
+    while(number[i_counter] != '\0')
+    {
+        if(number[i_counter] == '.' || number[i_counter] == ',')
+        {
+            *contr = false;
+            return i_ret;
+        }
+        i_counter++;
     }
     return i_ret;
 }

@@ -1,10 +1,10 @@
 @echo off
 
-kodPowrotu %* /s
+kodPowrotu2 %* /s
 
-if %ERRORLEVEL% LSS 11 ( echo Prawidlowa wartosc )
-if %ERRORLEVEL% EQU 11 ( echo Brak parametru )
-if %ERRORLEVEL% GTR 11 ( echo Blad w postaci parametru )
+if %ERRORLEVEL% EQU 0 ( echo Prawidlowa wartosc )
+if %ERRORLEVEL% EQU 1 ( echo Brak parametru )
+if %ERRORLEVEL% EQU 2 ( echo Blad w postaci parametru )
 
 
 pause

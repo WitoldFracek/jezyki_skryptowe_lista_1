@@ -153,6 +153,8 @@ int main(int args, char** argv, char** env)
     }
     bool b_is_silent = isSilent(argsToString[argsToString.size()-1]);
 
+    if(args == (1 + b_is_silent)) return 1; //Brak parametrow.
+
     vector<Storage> v_storage;
 
     for(int i=0; i<argsToString.size()-b_is_silent; i++)
@@ -177,8 +179,9 @@ int main(int args, char** argv, char** env)
     sort(v_storage.begin(), v_storage.end());
     for(int i=0; i<v_storage.size(); i++)
     {
-        cout << v_storage[i].getName() << endl << "=" << endl;
-        for(int j=0; j<v_storage[i].getData().size(); j++)
+        cout << v_storage[i].getName() << " = ";
+        cout << v_storage[i].getData()[0] << endl;
+        for(int j=1; j<v_storage[i].getData().size(); j++)
         {
             cout << "    " << v_storage[i].getData()[j] << endl;
         }

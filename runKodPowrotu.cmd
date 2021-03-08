@@ -7,4 +7,4 @@ if %ERRORLEVEL% EQU 1 ( echo Brak parametru )
 if %ERRORLEVEL% EQU 2 ( echo Blad w postaci parametru )
 
 
-pause
+pause>nul

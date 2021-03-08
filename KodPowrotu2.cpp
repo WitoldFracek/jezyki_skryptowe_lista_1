@@ -68,9 +68,17 @@ int main(int arg, char** argv, char** env)
         }
     }
     if(arg == 1 + b_is_silent)
+    {
         i_ret = 1;
+        if(!b_is_silent) cout << i_ret << endl;
+        return i_ret;
+    }
     else if(b_wrong_param)
+    {
         i_ret = 2;
-
+        if(!b_is_silent) cout << i_ret << endl;
+        return i_ret;
+    }
+    if(!b_is_silent) cout << i_ret << endl;
     return i_ret;
 }
